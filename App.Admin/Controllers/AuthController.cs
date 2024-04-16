@@ -16,6 +16,7 @@ namespace App.Admin.Controllers
         [HttpPost]
         public IActionResult Login([FromForm] LoginViewModel loginModel)
         {
+            Console.WriteLine("sdafasdfadsfdas");
             return View();
         }
 
