@@ -1,6 +1,13 @@
 ﻿@using App.Eticaret.Models.ViewModels
 @model LoginViewModel
 
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
 <div class="container-fluid">
     <div class="row">
         <h2 class="col-12 text-center">Login</h2>
@@ -13,7 +20,14 @@
 
                 <div class="form-group">
                     <label asp-for="Password"></label>
-                    <input asp-for="Password" class="form-control" />
+                    <div class="input-group">
+                        <input type="password" asp-for="Password" class="form-control" id="passwordInput" />
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="togglePasswordButton">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="site-btn mr-auto">Login</button>
@@ -24,3 +38,18 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        const passwordInput = document.getElementById('passwordInput');
+        const togglePasswordButton = document.getElementById('togglePasswordButton');
+
+        togglePasswordButton.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle button icon
+            this.innerHTML = type === 'password' ? '<i class="fa fa-eye" aria-hidden="true"></i>' : '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
+        });
+    </script>
+}
