@@ -1,9 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using App.Data.Contexts;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.Admin.Controllers
 {
     public class CategoryController : Controller
     {
+        private readonly ApplicationDbContext _dbContext;
+
+        public CategoryController(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         [Route("/categories")]
         [HttpGet]
         public IActionResult List()
